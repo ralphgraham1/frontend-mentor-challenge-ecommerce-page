@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { URLS } from "./../constants/route-links";
 import cart from ".././images/icon-cart.svg";
 import avatar from ".././images/image-avatar.png";
-import logo from "../images/logo.svg"
+import logo from "../images/logo.svg";
+import Cart from "./cart";
 
 const Navbar = () => {
   return (
@@ -55,6 +56,9 @@ const Navbar = () => {
             <a>
               <img src={cart} className=" w-10" alt=""></img>
             </a>
+            <p>
+              <Cart />
+            </p>
             <a>
               <img src={avatar} alt="" className="w-10"></img>
             </a>

@@ -7,11 +7,13 @@ import Women from "./components/contact";
 import Collections from "./components/collections";
 import Navbar from "./components/navbar";
 
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
+        
         <Routes>
           <Route path="/" element={<Collections />} />
           <Route path="/about" element={<About />} />
