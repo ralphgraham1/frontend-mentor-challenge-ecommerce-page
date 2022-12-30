@@ -6,6 +6,8 @@ import next from "../images/icon-next.svg";
 import previous from "../images/icon-previous.svg";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { products } from "./data";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../redux/cart-slice";
 
 // function Lightbox({products}) {
 //   return (
@@ -26,8 +28,10 @@ const Collections = () => {
   const products = [
     {
       id: 1,
+      title: "Fall Limited Edition Sneakers",
+      price: 125.0,
       mainImage: require("../images/image-product-1.jpg"),
-      thumbNail: require("../images/image-product-1-thumbnail.jpg"),
+      thumbNail: require("../images/image-product-1-thumbnail.jpg")
     },
     {
       id: 2,
@@ -47,8 +51,9 @@ const Collections = () => {
   ];
 
   const [value, setValue] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [slideIndex, setSlideIndex] = useState(1);
+  const dispatch = useDispatch();
 
   const nextSlide = () => {
     if (slideIndex !== products.length) {
@@ -73,15 +78,20 @@ const Collections = () => {
 
   const decrementIndex = () => {
     return setAmount((amount) => {
-      return amount === 0 ? amount : amount - 1;
+      return amount === 1 ? amount : amount - 1;
     });
+  };
+
+  const handleCart = (product) => {
+    const newProduct = { ...product, quantity: amount };
+    dispatch(addToCart(newProduct));
   };
 
   const { mainImage } = products[value];
 
   // const {cart}
 
-  console.log(products);
+  // console.log(products);
   return (
     <>
       {/* <Lightbox products={products} /> */}
@@ -169,8 +179,13 @@ const Collections = () => {
                 <img src={plus} alt="" height={30} width={20} />
               </button>
             </div>
-            <div className="flex items-center justify-center  space-x-4 bg-Orange  py-2 px-4 w-[60%] text-center text-White rounded-lg shadow">
-              <button className="flex">
+            <div className="flex items-center justify-center  space-x-4 bg-Orange  py-2 px-4 w-full text-center font-bold text-White rounded-lg shadow mt-5 hover:bg-orange-600 transition-all duration-200 ">
+              <button
+                onClick={() => {
+                  handleCart(products[0]);
+                }}
+                className="flex"
+              >
                 <AiOutlineShoppingCart className="w-8 h-8" />
                 Add to cart
               </button>

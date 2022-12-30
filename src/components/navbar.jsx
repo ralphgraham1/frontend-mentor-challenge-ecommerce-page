@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { URLS } from "./../constants/route-links";
 import cart from ".././images/icon-cart.svg";
@@ -7,8 +7,10 @@ import logo from "../images/logo.svg";
 import Cart from "./cart";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
   return (
-    <div className="flex flex-col items-center justify-center  max-w-7xl mx-auto">
+    <div className="relative flex flex-col items-center justify-center  max-w-7xl mx-auto">
       <nav className="w-[80%]  py-6 border-b-2  ">
         <div className="flex relative  items-center justify-between">
           <div className=" flex justify-center items-center space-x-10 pb-6 ">
@@ -53,12 +55,10 @@ const Navbar = () => {
           </div>
 
           <div className=" flex items-start space-x-3">
-            <a>
+            <button onClick={() => setOpenCart(!openCart)}>
               <img src={cart} className=" w-10" alt=""></img>
-            </a>
-            <p>
-              <Cart />
-            </p>
+            </button>
+            <div>{openCart && <Cart />}</div>
             <a>
               <img src={avatar} alt="" className="w-10"></img>
             </a>
